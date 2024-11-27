@@ -1,0 +1,43 @@
+[gd_scene load_steps=6 format=3 uid="uid://dto3fqaq6qxrv"]
+
+[ext_resource type="Texture2D" uid="uid://dp534muuxxp6o" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/gameOverGB.jpg" id="1_a0oqd"]
+[ext_resource type="Script" path="res://gameover_final.gd" id="1_uutf0"]
+[ext_resource type="AudioStream" uid="uid://b7fk6qrt55ty" path="res://audios/bttonsound.mp3" id="2_35xfx"]
+[ext_resource type="AudioStream" uid="uid://qas0dx72xixo" path="res://audios/etg.mp3" id="3_a35x8"]
+[ext_resource type="Texture2D" uid="uid://b3bo22dta46n2" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/Characters/Orc/satiro-Sheet v1.1.png" id="4_pg0x3"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_uutf0")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(324, 324)
+scale = Vector2(1.26563, 1.26563)
+texture = ExtResource("1_a0oqd")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+position = Vector2(0.000183105, 1.71661e-05)
+zoom = Vector2(1.78, 1)
+
+[node name="Button" type="Button" parent="Sprite2D"]
+offset_left = -47.4074
+offset_top = 192.79
+offset_right = 43.5926
+offset_bottom = 223.79
+text = "Reintentar"
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sprite2D"]
+stream = ExtResource("2_35xfx")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_a35x8")
+volume_db = 3.328
+pitch_scale = 0.68
+parameters/looping = true
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(136, 472)
+texture = ExtResource("4_pg0x3")
+
+[connection signal="mouse_entered" from="Sprite2D/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="Sprite2D/Button" to="." method="_on_button_pressed"]

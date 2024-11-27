@@ -3,6 +3,9 @@ extends CharacterBody2D
 @export var velocidad: float = 70.0  # Velocidad del personaje
 @onready var animated_sprite = $AnimatedSprite2D  # Referencia al AnimatedSprite2D
 
+var ruta: String = "user://game_data.dat"
+var Datos: Dictionary = {}
+
 func _process(delta):
 	var movimiento = Vector2.ZERO  # Inicializamos un vector de movimiento
 
@@ -32,3 +35,18 @@ func _process(delta):
 
 	# Mover el personaje y gestionar colisiones
 	move_and_slide()  # Mueve el personaje y maneja las colisiones
+
+
+func _ready():
+	cargar()
+	if Datos.has("player_position"):
+		position = Vector2(Datos["player_position"][0], Datos["player_position"][1])
+	print("Posición del jugador restaurada:", position)
+
+func cargar():
+	if FileAccess.file_exists(ruta):
+		var archivo = FileAccess.open(ruta, FileAccess.READ)
+		Datos = archivo.get_var()
+		archivo = null
+	else:
+		Datos = {}

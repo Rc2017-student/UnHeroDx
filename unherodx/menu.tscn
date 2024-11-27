@@ -1,0 +1,79 @@
+[gd_scene load_steps=12 format=3 uid="uid://cbypioghvi007"]
+
+[ext_resource type="Texture2D" uid="uid://ct3oetgiu2kx6" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/wall.png" id="1_2oiju"]
+[ext_resource type="Script" path="res://menu.gd" id="1_ig4gb"]
+[ext_resource type="Texture2D" uid="uid://criqbwqwku12n" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/Characters/Orc/dieeeemenu.png" id="2_6o8w5"]
+[ext_resource type="Texture2D" uid="uid://bqk0687gq34ri" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/bookmark.png" id="3_fe7yt"]
+[ext_resource type="Script" path="res://buttonNueva.gd" id="4_n265a"]
+[ext_resource type="Texture2D" uid="uid://cw8d2eemj3fqn" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/flag.png" id="4_nx78a"]
+[ext_resource type="Texture2D" uid="uid://b4nk61gcnvvuw" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/close.png" id="5_u2sgx"]
+[ext_resource type="Script" path="res://buttonCarga.gd" id="6_7pmnt"]
+[ext_resource type="Script" path="res://buttonSalir.gd" id="8_xnub0"]
+[ext_resource type="AudioStream" uid="uid://b7fk6qrt55ty" path="res://audios/bttonsound.mp3" id="9_y7d3u"]
+[ext_resource type="AudioStream" uid="uid://bt72ybfx3ortf" path="res://audios/menu.mp3" id="11_3dg5g"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_ig4gb")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(579.303, 137.75)
+scale = Vector2(1.53784, 1.53784)
+texture = ExtResource("1_2oiju")
+
+[node name="Sprite2D2" type="Sprite2D" parent="."]
+position = Vector2(584, 424)
+scale = Vector2(1.55676, 1.55676)
+texture = ExtResource("1_2oiju")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(552, 280)
+zoom = Vector2(1.2, 1.2)
+
+[node name="Sprite2D3" type="Sprite2D" parent="."]
+position = Vector2(324.944, 313.063)
+scale = Vector2(0.991995, 0.991995)
+texture = ExtResource("2_6o8w5")
+
+[node name="Button" type="Button" parent="."]
+offset_left = 703.0
+offset_top = 104.0
+offset_right = 972.0
+offset_bottom = 163.0
+theme_override_font_sizes/font_size = 30
+text = "Nueva partida"
+icon = ExtResource("3_fe7yt")
+script = ExtResource("4_n265a")
+
+[node name="Button2" type="Button" parent="."]
+offset_left = 752.0
+offset_top = 224.0
+offset_right = 911.0
+offset_bottom = 283.0
+theme_override_font_sizes/font_size = 30
+text = "Cargar"
+icon = ExtResource("4_nx78a")
+script = ExtResource("6_7pmnt")
+
+[node name="Button3" type="Button" parent="."]
+offset_left = 768.0
+offset_top = 352.0
+offset_right = 895.0
+offset_bottom = 411.0
+theme_override_font_sizes/font_size = 30
+text = "Salir"
+icon = ExtResource("5_u2sgx")
+script = ExtResource("8_xnub0")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_y7d3u")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("11_3dg5g")
+parameters/looping = true
+
+[connection signal="mouse_entered" from="Button" to="Button" method="_on_mouse_entered"]
+[connection signal="pressed" from="Button" to="Button" method="_on_pressed"]
+[connection signal="mouse_entered" from="Button2" to="Button2" method="_on_mouse_entered"]
+[connection signal="pressed" from="Button2" to="Button2" method="_on_pressed"]
+[connection signal="mouse_entered" from="Button3" to="Button3" method="_on_mouse_entered"]
+[connection signal="pressed" from="Button3" to="Button3" method="_on_pressed"]

@@ -1,0 +1,36 @@
+[gd_scene load_steps=5 format=3 uid="uid://djk18x71ghjpf"]
+
+[ext_resource type="Texture2D" uid="uid://dp534muuxxp6o" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/gameOverGB.jpg" id="1_34ja7"]
+[ext_resource type="Script" path="res://game_over.gd" id="1_wge48"]
+[ext_resource type="AudioStream" uid="uid://b7fk6qrt55ty" path="res://audios/bttonsound.mp3" id="3_8drr7"]
+[ext_resource type="AudioStream" uid="uid://qas0dx72xixo" path="res://audios/etg.mp3" id="3_rdwpo"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_wge48")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(324, 324)
+scale = Vector2(1.26563, 1.26563)
+texture = ExtResource("1_34ja7")
+
+[node name="Camera2D" type="Camera2D" parent="Sprite2D"]
+position = Vector2(0.000183105, 1.71661e-05)
+zoom = Vector2(1.78, 1)
+
+[node name="Button" type="Button" parent="Sprite2D"]
+offset_left = -47.4074
+offset_top = 192.79
+offset_right = 43.5926
+offset_bottom = 223.79
+text = "Reintentar"
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Sprite2D"]
+stream = ExtResource("3_8drr7")
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("3_rdwpo")
+parameters/looping = true
+
+[connection signal="mouse_entered" from="Sprite2D/Button" to="." method="_on_button_mouse_entered"]
+[connection signal="pressed" from="Sprite2D/Button" to="." method="_on_button_pressed"]

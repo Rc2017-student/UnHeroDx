@@ -1,0 +1,95 @@
+[gd_scene load_steps=10 format=3 uid="uid://dwyqjonqxlsfr"]
+
+[ext_resource type="Texture2D" uid="uid://d3711c24la20l" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/Tileset/BGcombat.jpg" id="1_co0tm"]
+[ext_resource type="Script" path="res://combate_2.gd" id="1_hnm0t"]
+[ext_resource type="Texture2D" uid="uid://bm2lixwi75eev" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/Characters/Orc/enemy2.png" id="2_imlx1"]
+[ext_resource type="Texture2D" uid="uid://diuu28vf70hqy" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/Tileset/wooodBG.png" id="3_bauta"]
+[ext_resource type="Texture2D" uid="uid://clsnslsp6bq8s" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/battle.png" id="4_uss7t"]
+[ext_resource type="AudioStream" uid="uid://b7fk6qrt55ty" path="res://audios/bttonsound.mp3" id="6_10oqc"]
+[ext_resource type="AudioStream" uid="uid://be0u1e5pup2cf" path="res://audios/punches.mp3" id="7_5nfyq"]
+[ext_resource type="AudioStream" uid="uid://3laxtmfgqn3e" path="res://audios/swordes.mp3" id="8_sixax"]
+[ext_resource type="AudioStream" uid="uid://cgxucpn7skota" path="res://audios/mainnew.mp3" id="9_q8cao"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_hnm0t")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(320, 190.5)
+scale = Vector2(1.05263, 1.13158)
+texture = ExtResource("1_co0tm")
+
+[node name="Sprite2D2" type="Sprite2D" parent="Sprite2D"]
+texture = ExtResource("2_imlx1")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D/Sprite2D2"]
+position = Vector2(7.60004, 156.86)
+scale = Vector2(1.07677, 0.48757)
+texture = ExtResource("3_bauta")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+metadata/_edit_use_anchors_ = true
+
+[node name="BotonAtacar" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 312.0
+offset_right = 376.0
+offset_bottom = 352.0
+text = "Atacar"
+icon = ExtResource("4_uss7t")
+metadata/_edit_use_anchors_ = true
+
+[node name="LabelMensaje" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 32.0
+offset_top = 304.0
+offset_right = 256.0
+offset_bottom = 360.0
+theme_override_font_sizes/font_size = 13
+text = "El combate comenzo"
+horizontal_alignment = 1
+metadata/_edit_use_anchors_ = true
+
+[node name="BarraDeVidaJugador" type="ProgressBar" parent="Control"]
+modulate = Color(0.788235, 0, 0.168627, 1)
+layout_mode = 0
+offset_left = 440.0
+offset_top = 320.0
+offset_right = 584.0
+offset_bottom = 347.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="BarraDeVidaEnemigo" type="ProgressBar" parent="Control"]
+modulate = Color(0.788235, 0, 0.168627, 1)
+layout_mode = 0
+offset_left = 200.0
+offset_top = 72.0
+offset_right = 424.0
+offset_bottom = 99.0
+show_percentage = false
+metadata/_edit_use_anchors_ = true
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="Control"]
+stream = ExtResource("6_10oqc")
+
+[node name="AudioStreamPlayer2D2" type="AudioStreamPlayer2D" parent="Control"]
+stream = ExtResource("7_5nfyq")
+
+[node name="AudioStreamPlayer2D3" type="AudioStreamPlayer2D" parent="Control"]
+stream = ExtResource("8_sixax")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 184)
+zoom = Vector2(1.8, 1.8)
+
+[node name="AudioStreamPlayer2D" type="AudioStreamPlayer2D" parent="."]
+stream = ExtResource("9_q8cao")
+volume_db = -16.0
+parameters/looping = true
+
+[connection signal="mouse_entered" from="Control/BotonAtacar" to="." method="_on_boton_atacar_mouse_entered"]

@@ -1,4 +1,4 @@
-[gd_scene load_steps=47 format=3 uid="uid://db2p7cn5xjsko"]
+[gd_scene load_steps=48 format=3 uid="uid://db2p7cn5xjsko"]
 
 [ext_resource type="Texture2D" uid="uid://80tiqa6vyne" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/Characters/Orc/Idle.png" id="1_anye5"]
 [ext_resource type="Script" path="res://enemy_1.gd" id="1_dlpyr"]
@@ -313,12 +313,15 @@ size = Vector2(8.1, 8)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_6p27y"]
 size = Vector2(64, 16)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_jmp8t"]
+size = Vector2(10, 10)
+
 [node name="CharacterBody2D" type="CharacterBody2D"]
 script = ExtResource("1_dlpyr")
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 sprite_frames = SubResource("SpriteFrames_7tykr")
-animation = &"Idle_L"
+animation = &"Walk_R"
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_dkpoh")
@@ -328,3 +331,11 @@ shape = SubResource("RectangleShape2D_dkpoh")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_6p27y")
 debug_color = Color(0.948284, 0.156601, 0.423379, 0.42)
+
+[node name="Area2D2" type="Area2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D2"]
+shape = SubResource("RectangleShape2D_jmp8t")
+debug_color = Color(0.646835, 0.504415, 0.372671, 0.42)
+
+[connection signal="body_entered" from="Area2D2" to="." method="_on_area_2d_2_body_entered"]

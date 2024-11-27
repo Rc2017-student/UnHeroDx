@@ -2,16 +2,28 @@ extends CharacterBody2D
 
 @export var velocidad: float = 50.0  # Velocidad del enemigo
 @onready var animated_sprite = $AnimatedSprite2D  # Referencia al AnimatedSprite2D
+@onready var area_2d = $Area2D  # Referencia al primer Area2D
+@onready var area_2d_2 = $Area2D2  # Referencia al segundo Area2D
 
 var player_detected = false  # Si el enemigo ha detectado al jugador
-var player = null  # Referencia al jugador
+@onready var player = null  # Referencia al jugador
 var lost_player_timer = 0.0  # Tiempo antes de que el enemigo se quede quieto
 var is_paused = false  # Variable para saber si el enemigo está en pausa
 var change_direction_time = 1.0  # Tiempo que el enemigo espera antes de cambiar dirección
 var direction = Vector2.ZERO  # Dirección actual del movimiento
 var timer = 0.0  # Contador para el cambio de dirección
 
+var initial_pause_timer = 5.0  # Temporizador inicial en segundos
+var is_initial_pause = true  # Verifica si estamos en pausa inicial
+
+var ruta: String = "user://game_data.dat"
+var Datos: Dictionary = {}
+
 func _ready():
+	# Desactivar las áreas al inicio
+	area_2d.monitoring = false
+	area_2d_2.monitoring = false
+	
 	# Conectar las señales del campo de visión
 	$Area2D.body_entered.connect(Callable(self, "_on_body_entered"))
 	$Area2D.body_exited.connect(Callable(self, "_on_body_exited"))
@@ -19,6 +31,15 @@ func _ready():
 	timer = change_direction_time  # Inicia el temporizador
 
 func _process(delta):
+	if is_initial_pause:
+		# Reducir el tiempo de pausa inicial
+		initial_pause_timer -= delta
+		if initial_pause_timer <= 0:
+			is_initial_pause = false  # Finaliza la pausa inicial
+			area_2d.monitoring = true  # Reactivar el primer Area2D
+			area_2d_2.monitoring = true  # Reactivar el segundo Area2D
+		return  # No realizar nada mientras está en pausa inicial
+
 	if is_paused:
 		# Reducir el tiempo de pausa
 		lost_player_timer -= delta
@@ -54,6 +75,10 @@ func _process(delta):
 	update_animation(movimiento)
 
 func update_animation(movimiento):
+	if is_initial_pause:
+		# No mostrar ninguna animación durante la pausa inicial
+		return
+
 	if movimiento.x > 0:
 		animated_sprite.play("Walk_R")  # Mover a la derecha
 	elif movimiento.x < 0:
@@ -84,3 +109,25 @@ func _on_body_exited(body):
 		player = null
 		is_paused = true  # Pausa de 3 segundos
 		lost_player_timer = 3.0  # Reinicia el temporizador de pausa
+
+func guardar_estado(player):
+	# Guardar la posición del jugador
+	Datos["player_position"] = [player.position.x, player.position.y]
+	# Marcar enemigo como activo en combate
+	var archivo = FileAccess.open(ruta, FileAccess.WRITE)
+	archivo.store_var(Datos)
+	archivo = null
+
+func cargar():
+	# Cargar los datos del archivo
+	if FileAccess.file_exists(ruta):
+		var archivo = FileAccess.open(ruta, FileAccess.READ)
+		Datos = archivo.get_var()
+		archivo = null
+	else:
+		Datos = {}
+
+func _on_area_2d_2_body_entered(body: Node2D) -> void:
+	if body.name == "personaje":
+		guardar_estado(body)  # Guarda datos antes de cambiar la escena
+		get_tree().change_scene_to_file("res://combate1.tscn")  # Cambia a la escena de combate

@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://7vm25mwj4jof"]
+
+[ext_resource type="Texture2D" uid="uid://d3711c24la20l" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/Tileset/BGcombat.jpg" id="1_653ul"]
+[ext_resource type="Script" path="res://combate_1.gd" id="1_a7kem"]
+[ext_resource type="Texture2D" uid="uid://diuu28vf70hqy" path="res://Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_v2.2_Free_Version/Minifantasy_Dungeon_Assets/Tileset/wooodBG.png" id="2_0ax7m"]
+
+[node name="Node2D" type="Node2D"]
+script = ExtResource("1_a7kem")
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(320, 190.5)
+scale = Vector2(1.05263, 1.13158)
+texture = ExtResource("1_653ul")
+
+[node name="Sprite2D" type="Sprite2D" parent="Sprite2D"]
+position = Vector2(7.60002, 156.86)
+scale = Vector2(1.07677, 0.48757)
+texture = ExtResource("2_0ax7m")
+
+[node name="Control" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="BotonAtacar" type="Button" parent="Control"]
+layout_mode = 0
+offset_left = 264.0
+offset_top = 312.0
+offset_right = 376.0
+offset_bottom = 352.0
+text = "Atacar"
+
+[node name="LabelMensaje" type="Label" parent="Control"]
+layout_mode = 0
+offset_left = 48.0
+offset_top = 328.0
+offset_right = 232.0
+offset_bottom = 351.0
+text = "El combate comenzo"
+
+[node name="BarraDeVidaJugador" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 440.0
+offset_top = 320.0
+offset_right = 584.0
+offset_bottom = 347.0
+show_percentage = false
+
+[node name="BarraDeVidaEnemigo" type="ProgressBar" parent="Control"]
+layout_mode = 0
+offset_left = 200.0
+offset_top = 72.0
+offset_right = 424.0
+offset_bottom = 99.0
+show_percentage = false
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(320, 184)
+zoom = Vector2(1.8, 1.8)
